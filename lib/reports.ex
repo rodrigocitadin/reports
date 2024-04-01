@@ -9,7 +9,10 @@ defmodule Reports do
   def build(filename) do
     "reports/inputs/#{filename}"
     |> File.stream!()
-    |> Enum.map(&parse_line/1)
+    |> Enum.reduce(reports_acc(), fn line, acc ->
+      [id, _food_name, price] = parse_line(line)
+      Map.put(acc, id, acc[id] + price)
+    end)
   end
 
   defp parse_line(line) do
@@ -19,12 +22,5 @@ defmodule Reports do
     |> List.update_at(2, &String.to_integer/1)
   end
 
-  # def build(filename) do
-  #   "reports/inputs/#{filename}"
-  #   |> File.read()
-  #   |> handle_file()
-  # end
-
-  # defp handle_file({:ok, result}), do: result
-  # defp handle_file({:error, _reason}), do: {:error, "Error while reading the file"}
+  defp reports_acc(), do: Enum.into(1..30, %{}, &{Integer.to_string(&1), 0})
 end
