@@ -23,7 +23,9 @@ defmodule Reports do
     |> Enum.reduce(reports_acc(), &sum_values/2)
   end
 
-  def most_spent(report), do: Enum.max_by(report, fn {_k, v} -> v end)
+  def most_spent_user(%{"users" => users}), do: Enum.max_by(users, fn {_k, v} -> v end)
+
+  def best_selling_food(%{"foods" => foods}), do: Enum.max_by(foods, fn {_k, v} -> v end)
 
   defp parse_file(filename) do
     "reports/inputs/#{filename}"
