@@ -7,12 +7,17 @@ defmodule Reports do
   WIP
   """
   def build(filename) do
-    "reports/inputs/#{filename}"
-    |> File.stream!()
-    |> Enum.reduce(reports_acc(), fn line, acc ->
-      [id, _food_name, price] = parse_line(line)
+    filename
+    |> parse_file()
+    |> Enum.reduce(reports_acc(), fn [id, _food_name, price], acc ->
       Map.put(acc, id, acc[id] + price)
     end)
+  end
+
+  defp parse_file(filename) do
+    "reports/inputs/#{filename}"
+    |> File.stream!()
+    |> Stream.map(&parse_line/1)
   end
 
   defp parse_line(line) do
