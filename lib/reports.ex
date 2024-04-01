@@ -9,9 +9,7 @@ defmodule Reports do
   def build(filename) do
     filename
     |> parse_file()
-    |> Enum.reduce(reports_acc(), fn [id, _food_name, price], acc ->
-      Map.put(acc, id, acc[id] + price)
-    end)
+    |> Enum.reduce(reports_acc(), &sum_values/2)
   end
 
   defp parse_file(filename) do
@@ -28,4 +26,6 @@ defmodule Reports do
   end
 
   defp reports_acc(), do: Enum.into(1..30, %{}, &{Integer.to_string(&1), 0})
+
+  defp sum_values([id, _food_name, price], acc), do: Map.put(acc, id, acc[id] + price)
 end
