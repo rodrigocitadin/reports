@@ -59,7 +59,6 @@ defmodule ReportsTest do
 
   describe "most_spent_user/1" do
     test "just work" do
-       
       response =
         "report_test.csv"
         |> Reports.build()
@@ -72,5 +71,15 @@ defmodule ReportsTest do
   end
 
   describe "best_selling_food/1" do
+    test "just work" do
+      response =
+        "report_test.csv"
+        |> Reports.build()
+        |> Reports.best_selling_food()
+
+      expected_response = {"esfirra", 3}
+
+      assert response == expected_response
+    end
   end
 end
