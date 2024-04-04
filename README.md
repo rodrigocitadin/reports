@@ -1,21 +1,38 @@
-# Reports
+# How to run
 
-**TODO: Add description**
+First, clone the repo:
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `reports` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:reports, "~> 0.1.0"}
-  ]
-end
+```sh
+git clone https://github.com/rodrigocitadin/reports && cd reports
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/reports>.
+Then, install deps
 
+```sh
+mix deps.get
+```
+
+So, run iex
+
+```sh
+iex -S mix
+```
+
+## Normal version
+
+```ex
+Reports.build "report_complete.csv"
+```
+
+## Parallel version
+
+```ex
+Reports.build_many ["report_1.csv", "report_2.csv", "report_3.csv"]
+```
+
+
+## Tests
+
+```sh
+mix test
+```
