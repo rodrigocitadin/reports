@@ -37,7 +37,9 @@ Reports.build_many ["report_1.csv", "report_2.csv", "report_3.csv"]
 :timer.tc fn -> Reports.build("report_complete.csv") end
 
 # Parallel
-:timer.tc fn -> Reports.build_many(["report_1.csv", "report_2.csv", "report_3.csv"]) end
+reports = Enum.map(1..10, fn _ -> "splitted_report.csv" end)
+
+:timer.tc fn -> Reports.build_many(reports) end
 ```
 
 Time is in microseconds
