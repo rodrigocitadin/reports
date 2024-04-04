@@ -14,9 +14,6 @@ defmodule Reports do
     "prato_feito"
   ]
 
-  @doc """
-  WIP
-  """
   @spec build(String.t()) :: map()
   def build(filename) do
     filename
