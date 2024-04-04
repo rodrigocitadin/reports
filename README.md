@@ -30,6 +30,17 @@ Reports.build "report_complete.csv"
 Reports.build_many ["report_1.csv", "report_2.csv", "report_3.csv"]
 ```
 
+## Time comparison
+
+```ex
+# Normal
+:timer.tc fn -> Reports.build("report_complete.csv") end
+
+# Parallel
+:timer.tc fn -> Reports.build_many(["report_1.csv", "report_2.csv", "report_3.csv"]) end
+```
+
+Time is in microseconds
 
 ## Tests
 
