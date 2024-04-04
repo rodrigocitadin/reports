@@ -27,7 +27,9 @@ Reports.build "report_complete.csv"
 ## Parallel version
 
 ```ex
-Reports.build_many ["report_1.csv", "report_2.csv", "report_3.csv"]
+reports = Enum.map(1..10, fn _ -> "splitted_report.csv" end)
+
+Reports.build_many reports
 ```
 
 ## Time comparison
