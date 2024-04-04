@@ -17,20 +17,24 @@ defmodule Reports do
   @doc """
   WIP
   """
+  @spec build(String.t()) :: map()
   def build(filename) do
     filename
     |> parse_file()
     |> Enum.reduce(reports_acc(), &sum_values/2)
   end
 
+  @spec build(list(String.t())) :: map()
   def build_many(filenames) do
     filenames
     |> Task.async_stream(&build/1)
     |> Enum.reduce(reports_acc(), fn {:ok, result}, report -> sum_reports(report, result) end)
   end
 
+  @spec build(map()) :: {String.t(), integer()}
   def most_spent_user(%{"users" => users}), do: Enum.max_by(users, fn {_k, v} -> v end)
 
+  @spec build(map()) :: {String.t(), integer()}
   def best_selling_food(%{"foods" => foods}), do: Enum.max_by(foods, fn {_k, v} -> v end)
 
   defp sum_reports(
